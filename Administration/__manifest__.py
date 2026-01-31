@@ -1,0 +1,4 @@
+{
+    'name': "Administration",
+    'author': "Patel"
+}
