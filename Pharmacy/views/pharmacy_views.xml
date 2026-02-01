@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Shelf Views -->
+    <record id="view_pharmacy_shelf_form" model="ir.ui.view">
+        <field name="name">pharmacy.shelf.form</field>
+        <field name="model">pharmacy.shelf</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook>
+                        <page string="Medicines">
+                            <field name="product_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_pharmacy_shelf_tree" model="ir.ui.view">
+        <field name="name">pharmacy.shelf.tree</field>
+        <field name="model">pharmacy.shelf</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Product/Medicine Views -->
+    <record id="view_product_template_form_inherit_pharmacy" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.pharmacy</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='general_information']" position="after">
+                <page string="Pharmacy" name="pharmacy">
+                    <group>
+                        <field name="is_medicine"/>
+                        <field name="shelf_id" invisible="not is_medicine"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Sale Order Line: Add Schedule/Duration fields -->
+    <record id="view_sale_order_form_inherit_pharmacy" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit.pharmacy</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_line']/list/field[@name='product_uom_qty']" position="before">
+                <field name="med_morning" optional="hide"/>
+                <field name="med_afternoon" optional="hide"/>
+                <field name="med_evening" optional="hide"/>
+                <field name="med_duration_days" optional="hide"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

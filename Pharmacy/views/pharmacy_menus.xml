@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Top Level Menu -->
+    <menuitem id="menu_pharmacy_root" name="Pharmacy" sequence="10"/>
+
+    <!-- Actions -->
+    <record id="action_pharmacy_medicines" model="ir.actions.act_window">
+        <field name="name">Medicines</field>
+        <field name="res_model">product.template</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[('is_medicine', '=', True)]</field>
+        <field name="context">{'default_is_medicine': True}</field>
+    </record>
+
+    <record id="action_pharmacy_shelves" model="ir.actions.act_window">
+        <field name="name">Shelves</field>
+        <field name="res_model">pharmacy.shelf</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Sub Menus -->
+    <menuitem id="menu_pharmacy_medicines"
+              name="Medicines"
+              parent="menu_pharmacy_root"
+              action="action_pharmacy_medicines"
+              sequence="1"/>
+
+    <menuitem id="menu_pharmacy_shelves"
+              name="Shelves"
+              parent="menu_pharmacy_root"
+              action="action_pharmacy_shelves"
+              sequence="2"/>
+
+    <!-- Links to Sales and Invoices -->
+    <menuitem id="menu_pharmacy_sales"
+              name="Sales"
+              parent="menu_pharmacy_root"
+              action="sale.action_orders"
+              sequence="3"/>
+
+    <menuitem id="menu_pharmacy_invoices"
+              name="Invoices"
+              parent="menu_pharmacy_root"
+              action="account.action_move_out_invoice_type"
+              sequence="4"/>
+
+</odoo>

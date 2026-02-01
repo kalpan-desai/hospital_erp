@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Inherit Sale Order Report to add Schedule -->
+    <template id="report_saleorder_document_inherit_pharmacy" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_schedule" class="text-center">Schedule</th>
+            <th name="th_duration" class="text-center">Days</th>
+        </xpath>
+        <xpath expr="//td[@name='td_product_quantity']" position="before">
+            <td name="td_schedule" class="text-center">
+                <t t-if="line.med_morning or line.med_afternoon or line.med_evening">
+                    <span t-esc="line.med_morning or 0"/>-<span t-esc="line.med_afternoon or 0"/>-<span t-esc="line.med_evening or 0"/>
+                </t>
+            </td>
+            <td name="td_duration" class="text-center">
+                <t t-if="line.med_duration_days">
+                    <span t-esc="line.med_duration_days"/>
+                </t>
+            </td>
+        </xpath>
+    </template>
+
+    <!-- Inherit Invoice Report to add Schedule -->
+    <template id="report_invoice_document_inherit_pharmacy" inherit_id="account.report_invoice_document">
+        <xpath expr="//th[@name='th_quantity']" position="before">
+            <th name="th_schedule" class="text-center">Schedule</th>
+            <th name="th_duration" class="text-center">Days</th>
+        </xpath>
+        <xpath expr="//td[@name='td_quantity']" position="before">
+            <td name="td_schedule" class="text-center">
+                <t t-if="line.med_morning or line.med_afternoon or line.med_evening">
+                    <span t-esc="line.med_morning or 0"/>-<span t-esc="line.med_afternoon or 0"/>-<span t-esc="line.med_evening or 0"/>
+                </t>
+            </td>
+            <td name="td_duration" class="text-center">
+                <t t-if="line.med_duration_days">
+                    <span t-esc="line.med_duration_days"/>
+                </t>
+            </td>
+        </xpath>
+    </template>
+
+</odoo>
