@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- WARD List VIEW -->
+    <record id="view_hospital_ward_list" model="ir.ui.view">
+        <field name="name">hospital.ward.list</field>
+        <field name="model">hospital.ward</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="ward_type"/>
+                <field name="capacity"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- WARD FORM VIEW -->
+    <record id="view_hospital_ward_form" model="ir.ui.view">
+        <field name="name">hospital.ward.form</field>
+        <field name="model">hospital.ward</field>
+        <field name="arch" type="xml">
+            <form string="Ward">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="ward_type"/>
+                        </group>
+                        <group>
+                            <field name="capacity"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+
+                    <group>
+                        <field name="note"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="action_hospital_ward" model="ir.actions.act_window">
+        <field name="name">ward</field>
+        <field name="res_model">hospital.ward</field>
+    </record>
+
+</odoo>

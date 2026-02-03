@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root Menu -->
+    <menuitem
+        id="hospital_menu_root"
+        name="Hospital"/>
+
+    <!-- Administration -->
+    <menuitem
+        id="hospital_admin"
+        name="Administration"
+        parent="hospital_menu_root"/>
+
+    <!-- Patient Menu -->
+    <menuitem
+        id="hospital_admin_patient"
+        name="Patients"
+        parent="hospital_admin"
+        action="action_hospital_patient"/>
+
+    <!-- Wards Menu -->
+    <menuitem
+        id="hospital_admin_ward"
+        name="Wards"
+        parent="hospital_admin"
+        action="action_hospital_ward"/>
+
+</odoo>
