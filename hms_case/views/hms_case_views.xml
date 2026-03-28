@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pivot / Form / List views for HMS Case -->
+    
+    <record id="view_hms_case_list" model="ir.ui.view">
+        <field name="name">hms.case.list</field>
+        <field name="model">hms.case</field>
+        <field name="arch" type="xml">
+            <list string="Cases">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="admission_type"/>
+                <field name="start_date"/>
+                <field name="state" widget="badge" decoration-info="state == 'open'" decoration-success="state == 'active'" decoration-muted="state == 'closed'"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hms_case_form" model="ir.ui.view">
+        <field name="name">hms.case.form</field>
+        <field name="model">hms.case</field>
+        <field name="arch" type="xml">
+            <form string="Case">
+                <header>
+                    <button name="action_open" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_active" string="Start Treatment" type="object" class="oe_highlight" invisible="state != 'open'"/>
+                    <button name="action_discharge" string="Discharge" type="object" class="oe_highlight" invisible="state != 'active'"/>
+                    <button name="action_close" string="Close Case" type="object" class="oe_highlight" invisible="state != 'discharged'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state in ('closed', 'cancel')"/>
+                    
+                    <button name="action_create_invoice" string="Create Invoice" type="object" class="oe_highlight" invisible="state in ('draft', 'cancel') or move_id != False" groups="account.group_account_invoice"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,open,active,discharged,closed"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_invoice" type="object" class="oe_stat_button" icon="fa-pencil-square-o" invisible="not move_id">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Invoice</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                            <field name="nurse_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="admission_type"/>
+                            
+
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Vitals" name="vitals">
+                            <field name="vital_ids">
+                                <list editable="bottom">
+                                    <field name="date"/>
+                                    <field name="vital_type"/>
+                                    <field name="value"/>
+                                    <field name="notes"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Billing &amp; Services" name="billing">
+                            <field name="service_line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id"/>
+                                    <field name="description"/>
+                                    <field name="quantity"/>
+                                    <field name="price_unit"/>
+                                    <field name="price_subtotal"/>
+                                    <field name="invoiced" readonly="1"/>
+                                </list>
+                            </field>
+                            <group class="oe_subtotal_footer oe_right">
+                                <field name="total_cost" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </page>
+                        <page string="Medical Records" name="medical_records">
+                            <separator string="Medical Notes"/>
+                            <!-- Assuming medical notes handled via chatter or basic field -->
+                        </page>
+                        <page string="Prescriptions" name="prescriptions">
+                            <separator string="Prescriptions"/>
+                            <!-- Placeholder -->
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hms_case" model="ir.actions.act_window">
+        <field name="name">Cases</field>
+        <field name="res_model">hms.case</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new patient case
+            </p>
+        </field>
+    </record>
+
+</odoo>

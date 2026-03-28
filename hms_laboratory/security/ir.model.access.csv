@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hms_lab_test,hms.lab.test,model_hms_lab_test,base.group_user,1,1,1,1
+access_hms_lab_order,hms.lab.order,model_hms_lab_order,base.group_user,1,1,1,1
+access_hms_lab_order_line,hms.lab.order.line,model_hms_lab_order_line,base.group_user,1,1,1,1
+access_hms_lab_report,hms.lab.report,model_hms_lab_report,base.group_user,1,1,1,1

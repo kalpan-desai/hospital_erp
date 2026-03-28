@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level menu -->
+    <menuitem id="menu_hms_lab_root" name="Laboratory" sequence="11"/>
+
+    <!-- Parent menus -->
+    <menuitem id="menu_hms_lab_operations" name="Operations" parent="menu_hms_lab_root" sequence="1"/>
+    <menuitem id="menu_hms_lab_reports" name="Reports" parent="menu_hms_lab_root" sequence="2"/>
+    <menuitem id="menu_hms_lab_configuration" name="Configuration" parent="menu_hms_lab_root" sequence="10"/>
+
+    <!-- Action menus -->
+    <menuitem id="menu_hms_lab_order_list" name="Lab Orders" parent="menu_hms_lab_operations" action="action_hms_lab_order" sequence="1"/>
+    <menuitem id="menu_hms_lab_report_list" name="Lab Reports" parent="menu_hms_lab_reports" action="action_hms_lab_report" sequence="1"/>
+    
+    <menuitem id="menu_hms_lab_test_list" name="Lab Tests Catalog" parent="menu_hms_lab_configuration" action="action_hms_lab_test" sequence="1"/>
+</odoo>

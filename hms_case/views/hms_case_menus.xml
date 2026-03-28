@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top-level menu -->
+    <menuitem id="menu_hms_case_root" name="Case Management" sequence="10"/>
+
+    <!-- Parent menus -->
+    <menuitem id="menu_hms_case_operations" name="Operations" parent="menu_hms_case_root" sequence="1"/>
+    <menuitem id="menu_hms_case_configuration" name="Configuration" parent="menu_hms_case_root" sequence="10"/>
+
+    <!-- Action menus -->
+    <menuitem id="menu_hms_case_list" name="Cases" parent="menu_hms_case_operations" action="action_hms_case" sequence="1"/>
+</odoo>

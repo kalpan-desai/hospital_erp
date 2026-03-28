@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hms_case_form_inherit_admin" model="ir.ui.view">
+        <field name="name">hms.case.form.inherit.admin</field>
+        <field name="model">hms.case</field>
+        <field name="inherit_id" ref="hms_case.view_hms_case_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='admission_type']" position="after">
+                <field name="bed_id" invisible="admission_type != 'admission'" required="admission_type == 'admission'"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

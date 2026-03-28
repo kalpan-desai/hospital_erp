@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hms_case_form_inherit_lab" model="ir.ui.view">
+        <field name="name">hms.case.form.inherit.lab</field>
+        <field name="model">hms.case</field>
+        <field name="inherit_id" ref="hms_case.view_hms_case_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_lab_orders" type="object" class="oe_stat_button" icon="fa-flask">
+                    <div class="o_field_widget o_stat_info">
+                        <span class="o_stat_text">Lab Orders</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="action_request_lab_test" string="Request Lab Test" type="object" class="oe_highlight" invisible="state in ('draft', 'cancel', 'closed')"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
