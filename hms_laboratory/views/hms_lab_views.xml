@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Lab Test Catalog -->
+    <record id="view_hms_lab_test_list" model="ir.ui.view">
+        <field name="name">hms.lab.test.list</field>
+        <field name="model">hms.lab.test</field>
+        <field name="arch" type="xml">
+            <list string="Lab Tests">
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="price"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hms_lab_test_form" model="ir.ui.view">
+        <field name="name">hms.lab.test.form</field>
+        <field name="model">hms.lab.test</field>
+        <field name="arch" type="xml">
+            <form string="Lab Test">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="category_id"/>
+                        </group>
+                        <group>
+                            <field name="product_id"/>
+                            <field name="price"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hms_lab_test" model="ir.actions.act_window">
+        <field name="name">Lab Tests</field>
+        <field name="res_model">hms.lab.test</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Lab Order -->
+    <record id="view_hms_lab_order_list" model="ir.ui.view">
+        <field name="name">hms.lab.order.list</field>
+        <field name="model">hms.lab.order</field>
+        <field name="arch" type="xml">
+            <list string="Lab Orders">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="doctor_id"/>
+                <field name="date"/>
+                <field name="priority" widget="priority"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hms_lab_order_kanban" model="ir.ui.view">
+        <field name="name">hms.lab.order.kanban</field>
+        <field name="model">hms.lab.order</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state">
+                <field name="name"/>
+                <field name="patient_id"/>
+                <field name="priority"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_record_top">
+                                <div class="o_kanban_record_headings">
+                                    <strong class="o_kanban_record_title"><field name="name"/></strong>
+                                </div>
+                                <field name="priority" widget="priority"/>
+                            </div>
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left">
+                                    <field name="patient_id"/>
+                                </div>
+                                <div class="oe_kanban_bottom_right">
+                                    <field name="state" widget="label_selection" options="{'classes': {'draft': 'default', 'in_progress': 'info', 'completed': 'success', 'cancel': 'danger'}}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_hms_lab_order_form" model="ir.ui.view">
+        <field name="name">hms.lab.order.form</field>
+        <field name="model">hms.lab.order</field>
+        <field name="arch" type="xml">
+            <form string="Lab Order">
+                <header>
+                    <button name="action_confirm" string="Confirm" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <button name="action_done" string="Mark as Completed" type="object" class="btn-success" invisible="state != 'in_progress'"/>
+                    <button name="action_cancel" string="Cancel" type="object" invisible="state in ('completed', 'cancel')"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="patient_id"/>
+                            <field name="doctor_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="priority" widget="priority"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Tests" name="tests">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="test_id"/>
+                                    <field name="instructions"/>
+                                    <field name="price"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Internal Notes" name="notes">
+                            <field name="notes" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hms_lab_order" model="ir.actions.act_window">
+        <field name="name">Lab Orders</field>
+        <field name="res_model">hms.lab.order</field>
+        <field name="view_mode">kanban,list,form</field>
+    </record>
+
+    <!-- Lab Report -->
+    <record id="view_hms_lab_report_list" model="ir.ui.view">
+        <field name="name">hms.lab.report.list</field>
+        <field name="model">hms.lab.report</field>
+        <field name="arch" type="xml">
+            <list string="Lab Reports">
+                <field name="name"/>
+                <field name="order_id"/>
+                <field name="patient_id"/>
+                <field name="date"/>
+                <field name="state" widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_hms_lab_report_form" model="ir.ui.view">
+        <field name="name">hms.lab.report.form</field>
+        <field name="model">hms.lab.report</field>
+        <field name="arch" type="xml">
+            <form string="Lab Report">
+                <header>
+                    <button name="action_done" string="Finish Report" type="object" class="oe_highlight" invisible="state != 'draft'"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="order_id"/>
+                            <field name="patient_id"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="doctor_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Test Results" name="results">
+                            <field name="result" widget="html" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_hms_lab_report" model="ir.actions.act_window">
+        <field name="name">Lab Reports</field>
+        <field name="res_model">hms.lab.report</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+</odoo>
