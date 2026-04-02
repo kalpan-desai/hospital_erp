@@ -8,5 +8,8 @@
     'data': [
         'views/hms_case_views_inherit.xml',
     ],
+    'demo': [
+        'demo/demo_data.xml',
+    ],
     'license': 'LGPL-3',
 }

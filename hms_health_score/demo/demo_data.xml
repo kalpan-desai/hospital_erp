@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Update John's Demo Case to include specific diseases -->
+        <record id="hms_integration_admin.demo_case_john" model="hms.case">
+            <field name="disease_ids" eval="[(4, ref('hms_health_score.disease_diabetes')), (4, ref('hms_health_score.disease_hypertension'))]"/>
+        </record>
+        
+        <!-- Call computation to generate the Health Score visually! -->
+        <function model="health.score" name="action_compute_all_scores"/>
+    </data>
+</odoo>

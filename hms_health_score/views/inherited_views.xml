@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- HMS Case Inherit: Add disease tracking -->
+    <record id="view_hms_case_form_inherit_health" model="ir.ui.view">
+        <field name="name">hms.case.form.inherit.health</field>
+        <field name="model">hms.case</field>
+        <field name="inherit_id" ref="hms_case.view_hms_case_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='medical_records']/separator" position="before">
+                <group string="Diagnoses">
+                    <field name="disease_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Lab Test Inherit: Add normal ranges -->
+    <record id="view_hms_lab_test_form_inherit_health" model="ir.ui.view">
+        <field name="name">hms.lab.test.form.inherit.health</field>
+        <field name="model">hms.lab.test</field>
+        <field name="inherit_id" ref="hms_laboratory.view_hms_lab_test_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <group string="Evaluation Config">
+                    <field name="normal_min"/>
+                    <field name="normal_max"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Product Template Inherit: Add Medication Type -->
+    <record id="view_product_template_form_inherit_health" model="ir.ui.view">
+        <field name="name">product.template.form.inherit.health</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="hms_pharmacy.view_product_template_form_inherit_pharmacy"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_medicine']" position="after">
+                <field name="medication_type" invisible="is_medicine == False"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Hospital Patient Inherit: Smart Button -->
+    <record id="view_hospital_patient_form_inherit_health" model="ir.ui.view">
+        <field name="name">hospital.patient.form.inherit.health</field>
+        <field name="model">hospital.patient</field>
+        <field name="inherit_id" ref="hms_administraion.view_hospital_patient_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <button name="%(action_health_score)d" string="Score History" type="action"/>
+                </header>
+            </xpath>
+            <xpath expr="//sheet/group[1]" position="before">
+                <div class="oe_button_box" name="button_box">
+                    <button name="action_view_health_score" type="object" class="oe_stat_button" icon="fa-heartbeat">
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Health Score</span>
+                            <span class="o_stat_value"><field name="health_score_id" readonly="1" /></span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

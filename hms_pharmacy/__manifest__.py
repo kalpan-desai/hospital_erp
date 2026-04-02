@@ -21,5 +21,7 @@
         'views/pharmacy_views.xml',
         'report/pharmacy_reports.xml',
     ],
-    'demo': [],
+    'demo': [
+        'demo/demo_data.xml',
+    ],
 }

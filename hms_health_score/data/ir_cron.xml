@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_compute_health_scores" model="ir.cron">
+            <field name="name">Daily Health Score Re-computation</field>
+            <field name="model_id" ref="model_health_score"/>
+            <field name="state">code</field>
+            <field name="code">model.action_compute_all_scores()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+
+        </record>
+    </data>
+</odoo>

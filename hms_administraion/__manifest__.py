@@ -3,7 +3,7 @@
     'author': "Kunj Koradiya",
     'description': "This is the description",
     'license': "LGPL-3",
-    'depends': ['base'],
+    'depends': ['base', 'product'],
     'installable': True,
     'application': True,
     'category': 'Healthcare',
@@ -14,5 +14,8 @@
         'views/hospital_ward.xml',
         'views/hospital_bed_views.xml',
         'views/hospital_menu.xml',
+    ],
+    'demo': [
+        'demo/demo_data.xml',
     ]
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_disease_master_list" model="ir.ui.view">
+        <field name="name">health.disease.master.list</field>
+        <field name="model">health.disease.master</field>
+        <field name="arch" type="xml">
+            <list string="Diseases">
+                <field name="name"/>
+                <field name="impact_score"/>
+                <field name="severity_factor"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_disease_master" model="ir.actions.act_window">
+        <field name="name">Disease Master</field>
+        <field name="res_model">health.disease.master</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    
+    <menuitem id="menu_hms_health_score_root" name="Health Score" sequence="30"/>
+    <menuitem id="menu_disease_master" name="Disease Catalog" parent="menu_hms_health_score_root" action="action_disease_master" sequence="10"/>
+
+</odoo>

@@ -16,6 +16,9 @@
         'views/hms_lab_views.xml',
         'views/hms_lab_menus.xml',
     ],
+    'demo': [
+        'demo/demo_data.xml',
+    ],
     'installable': True,
     'application': True,
     'auto_install': False,
