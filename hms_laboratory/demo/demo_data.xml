@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Add standard product for lab tests -->
+        <record id="demo_lab_test_product" model="product.product">
+            <field name="name">Standard Lab Charge</field>
+            <field name="type">service</field>
+            <field name="list_price">50.0</field>
+        </record>
+
+        <!-- Lab Tests -->
+        <record id="demo_test_blood_sugar" model="hms.lab.test">
+            <field name="name">Fasting Blood Sugar</field>
+            <field name="product_id" ref="demo_lab_test_product"/>
+        </record>
+        
+        <record id="demo_test_hemoglobin" model="hms.lab.test">
+            <field name="name">Complete Blood Count (CBC)</field>
+            <field name="product_id" ref="demo_lab_test_product"/>
+        </record>
+    </data>
+</odoo>

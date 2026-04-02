@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="demo_sale_order_john" model="sale.order">
+            <field name="partner_id" ref="hms_administraion.demo_partner_john"/>
+            <field name="case_id" ref="hms_integration_admin.demo_case_john"/>
+            <field name="state">sale</field>
+            <field name="order_line" eval="[
+                (0, 0, {
+                    'product_id': ref('hms_pharmacy.demo_med_paracetamol'),
+                    'name': 'Paracetamol 500mg (Demo Prescription)',
+                    'product_uom_qty': 10,
+                    'price_unit': 5.0
+                })
+            ]"/>
+        </record>
+    </data>
+</odoo>

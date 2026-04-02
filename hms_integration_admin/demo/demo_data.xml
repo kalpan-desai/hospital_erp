@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!-- Use Admin Bridge to create cases because it relies on Administration patients -->
+        <record id="demo_case_john" model="hms.case">
+            <field name="patient_id" ref="hms_administraion.demo_patient_john"/>
+            <field name="admission_type">admission</field>
+            <field name="state">open</field>
+            <field name="bed_id" ref="hms_administraion.demo_bed_g1"/>
+        </record>
+
+        <record id="demo_case_jane" model="hms.case">
+            <field name="patient_id" ref="hms_administraion.demo_patient_jane"/>
+            <field name="admission_type">walk_in</field>
+            <field name="state">open</field>
+        </record>
+
+        <!-- Generate Base Vitals for John -->
+        <record id="demo_vital_john_bp" model="hms.patient.vital">
+            <field name="case_id" ref="demo_case_john"/>
+            <field name="vital_type">bp</field>
+            <field name="value">140/90</field>
+            <field name="notes">Slightly elevated</field>
+        </record>
+
+        <record id="demo_vital_john_temp" model="hms.patient.vital">
+            <field name="case_id" ref="demo_case_john"/>
+            <field name="vital_type">temp</field>
+            <field name="value">38.5</field>
+            <field name="notes">Fever</field>
+        </record>
+    </data>
+</odoo>

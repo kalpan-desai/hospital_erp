@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="demo_partner_john" model="res.partner">
+            <field name="name">John Doe</field>
+        </record>
+        
+        <record id="demo_patient_john" model="hospital.patient">
+            <field name="partner_id" ref="demo_partner_john"/>
+            <field name="dob">1980-05-15</field>
+            <field name="gender">male</field>
+            <field name="blood_group">o+</field>
+        </record>
+
+        <record id="demo_partner_jane" model="res.partner">
+            <field name="name">Jane Smith</field>
+        </record>
+
+        <record id="demo_patient_jane" model="hospital.patient">
+            <field name="partner_id" ref="demo_partner_jane"/>
+            <field name="dob">1992-08-22</field>
+            <field name="gender">female</field>
+            <field name="blood_group">a+</field>
+        </record>
+
+        <record id="demo_ward_general" model="hospital.ward">
+            <field name="name">General Ward</field>
+            <field name="code">GW-01</field>
+            <field name="capacity">20</field>
+        </record>
+
+        <record id="demo_bed_charge_product" model="product.product">
+            <field name="name">Standard Bed Charge (Daily)</field>
+            <field name="type">service</field>
+            <field name="list_price">150.0</field>
+        </record>
+
+        <record id="demo_bed_g1" model="hospital.bed">
+            <field name="name">G-01</field>
+            <field name="ward_id" ref="demo_ward_general"/>
+            <field name="product_id" ref="demo_bed_charge_product"/>
+            <field name="state">available</field>
+        </record>
+        
+        <record id="demo_bed_g2" model="hospital.bed">
+            <field name="name">G-02</field>
+            <field name="ward_id" ref="demo_ward_general"/>
+            <field name="product_id" ref="demo_bed_charge_product"/>
+            <field name="state">available</field>
+        </record>
+
+    </data>
+</odoo>
